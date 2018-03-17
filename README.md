@@ -1,9 +1,8 @@
 # Accounts
 
-Gmail - facebook.fitness.bot@gmail.com
+facebook - mustafa.hakimix@gmail.com
 
-Heroku - facebook.fitness.bot@gmail.com
+Heroku - projectbackup@outlook.dk
 
-WitAI - github (Hakimix)
+Wit AI - github
 
-Facebook - mustafa.hakimix@gmail.com
