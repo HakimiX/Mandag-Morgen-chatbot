@@ -2,7 +2,8 @@
 
 facebook - mustafa.hakimix@gmail.com
 
-Heroku - projectbackup@outlook.dk
+Heroku - projectbackup@outlook.dk (mmmessengerdeploy)
 
 Wit AI - github
+
 

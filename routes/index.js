@@ -15,7 +15,7 @@ var token = "EAAF4c0kP0IoBAMqycdA1BtBuXZCQ1Q0bLnle0oqY00URRSzxZC1IIZAlZCcfkEfbOH
 
 // WIT AI
 var wit_endpoint = 'https://api.wit.ai/message?v=17032018&q=';
-var wit_token = '5aad162e-da68-4081-9c2f-21d735001031';
+var wit_token = '4MC3RLLHBHUK2YV5VRWMWJRBFGACPIZI';
 
 // GET Home page
 router.get('/', function (req, res, next) {
