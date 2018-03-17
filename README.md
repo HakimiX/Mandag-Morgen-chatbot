@@ -4,6 +4,8 @@ facebook - mustafa.hakimix@gmail.com
 
 Heroku - projectbackup@outlook.dk (mmmessengerdeploy)
 
-Wit AI - github
+Wit AI - github (mmmessenger)
+
+
 
 
