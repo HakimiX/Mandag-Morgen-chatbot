@@ -6,7 +6,7 @@ var http = require('http');
 var router = express.Router();
 
 var fbapi = require('../facebook/fbapi');
-var api = require('../api/consume');
+var consume = require('../api/consume');
 
 var mysql = require('mysql');
 
@@ -15,6 +15,9 @@ var token = "EAAF4c0kP0IoBAMqycdA1BtBuXZCQ1Q0bLnle0oqY00URRSzxZC1IIZAlZCcfkEfbOH
 // WIT AI
 var wit_endpoint = 'https://api.wit.ai/message?v=17032018&q=';
 var wit_token = '4MC3RLLHBHUK2YV5VRWMWJRBFGACPIZI';
+
+// Fetch data
+consume.getArticles();
 
 // GET Home page
 router.get('/', function (req, res, next) {
@@ -41,6 +44,9 @@ router.post('/webhook/', function (req, res) {
             text = event.message.text;
 
             switch (text) {
+                case "nyheder":
+                    fbapi.sendArticleMessage(sender);
+                    break;
                 case "generic":
                     fbapi.generic(sender);
                     break;

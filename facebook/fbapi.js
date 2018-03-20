@@ -22,6 +22,79 @@ function sendText(sender, text) {
 } 
 
 
+function sendArticleMessage(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": ArticleBodyObj[0].Headline,
+                    "subtitle": ArticleBodyObj[0].CreateTime,
+                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[0].RelArticlePictureArticle + "/" + ArticleBodyObj[0].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[0].UrlKey,
+                        "title": "Læs mere"
+                    }],
+                }, {
+                    "title": ArticleBodyObj[1].Headline,
+                    "subtitle": ArticleBodyObj[1].CreateTime,
+                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[1].RelArticlePictureArticle + "/" + ArticleBodyObj[1].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[1].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ArticleBodyObj[2].Headline,
+                    "subtitle": ArticleBodyObj[2].CreateTime,
+                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[2].RelArticlePictureArticle + "/" + ArticleBodyObj[2].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[2].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ArticleBodyObj[3].Headline,
+                    "subtitle": ArticleBodyObj[3].CreateTime,
+                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[3].RelArticlePictureArticle + "/" + ArticleBodyObj[3].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ArticleBodyObj[4].Headline,
+                    "subtitle": ArticleBodyObj[4].CreateTime,
+                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[4].RelArticlePictureArticle + "/" + ArticleBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[4].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function generic(sender) {
     let messageData = {
         "attachment": {
@@ -77,4 +150,5 @@ function generic(sender) {
 
 
 module.exports.sendText = sendText;
+module.exports.sendArticleMessage = sendArticleMessage;
 module.exports.generic = generic;
