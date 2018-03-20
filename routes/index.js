@@ -101,10 +101,10 @@ function callWithAI(query, callback) {
 function handleIntent(intent, sender) {
     switch (intent) {
         case "greeting":
-            fbapi.sendText(sender, "Hi! kan jeg hjælpe dig?");
+            fbapi.sendText(sender, "Hej, hvad kan jeg hjælpe dig med?");
             break;
         default:
-            fbapi.sendText(sender, "I don't understand :(");
+            fbapi.sendText(sender, "Jeg forstår ikke");
             break;
     }
 }
