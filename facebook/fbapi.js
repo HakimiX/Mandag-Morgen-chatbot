@@ -22,7 +22,7 @@ function sendText(sender, text) {
 } 
 
 
-function sendArticleMessage(sender) {
+function sendArticles(sender) {
     let messageData = {
         "attachment": {
             "type": "template",
@@ -72,6 +72,60 @@ function sendArticleMessage(sender) {
                         "type": "web_url",
                         "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[4].UrlKey,
                         "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
+function sendColumns(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Klumme 1",
+                    "subtitle": "dato",
+                    "image_url": "https://i.imgur.com/FCTSI9J.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk",
+                        "title": "Read more"
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
+                    }],
+                }, {
+                    "title": "Klumme 2",
+                    "subtitle": "dato",
+                    "image_url": "https://i.imgur.com/dNo2ZB5.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk",
+                        "title": "Read more",
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
                     }],
                 }]
             }
@@ -150,5 +204,6 @@ function generic(sender) {
 
 
 module.exports.sendText = sendText;
-module.exports.sendArticleMessage = sendArticleMessage;
+module.exports.sendArticles = sendArticles;
+module.exports.sendColumns = sendColumns;
 module.exports.generic = generic;

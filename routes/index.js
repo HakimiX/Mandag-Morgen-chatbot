@@ -115,14 +115,15 @@ function handleIntent(intent, sender) {
             fbapi.sendText(sender, "Jeg kan hjælpe dig");
             break;
         case "klumme":
-            fbapi.sendText(sender, "seneste klummer");
+            timers.setTimeout(() => fbapi.sendText(sender, "Seneste Klummer"), 500);
+            timers.setTimeout(() => fbapi.sendColumns(sender), 1000);
             break;
         case "artikler":
             
             try {
                 if(!consume.isEmpty(ArticleBodyObj)) {
                     timers.setTimeout(() => fbapi.sendText(sender, "Seneste nyheder"), 500);
-                    timers.setTimeout(() => fbapi.sendArticleMessage(sender), 1000);
+                    timers.setTimeout(() => fbapi.sendArticles(sender), 1000);
                 } else {
                     console.log('Could not fetch articles');
                 }
