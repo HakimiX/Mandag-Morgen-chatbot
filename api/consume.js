@@ -29,4 +29,13 @@ function getArticles() {
     }).end();
 }
 
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
 module.exports.getArticles = getArticles;
+module.exports.isEmpty = isEmpty;
