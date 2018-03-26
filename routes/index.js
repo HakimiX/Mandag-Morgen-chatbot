@@ -7,6 +7,7 @@ var router = express.Router();
 
 var fbapi = require('../facebook/fbapi');
 var consume = require('../api/consume');
+var graph = require('../api/graph');
 
 var mysql = require('mysql');
 
@@ -18,6 +19,7 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 
 // Fetch data
 consume.getArticles();
+graph.getFBVideos();
 
 // GET Home page
 router.get('/', function (req, res, next) {
@@ -113,6 +115,21 @@ function handleIntent(intent, sender) {
             break;
         case "help":
             fbapi.sendText(sender, "Jeg kan hjælpe dig");
+            break;
+        case "video":
+
+            try {
+                if(!consume.isEmpty(FBvideoBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, FBvideoBodyObj.data[0].description), 500);
+                    timers.setTimeout(() => fbapi.sendVideo(sender), 1000);
+                } else {
+                    console.log('Could not fetch columns');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste videoer :(");
+            }
+
             break;
         case "klumme":
             timers.setTimeout(() => fbapi.sendText(sender, "Seneste Klummer"), 500);

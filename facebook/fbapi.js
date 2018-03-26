@@ -202,8 +202,38 @@ function generic(sender) {
     })
 }
 
+function sendVideo(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "media",
+                "elements": [{
+                    "media_type": "video",
+                    "url": "https://www.facebook.com/Altingetdk/videos/" + FBvideoBodyObj.data[0].id,
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
 
 module.exports.sendText = sendText;
 module.exports.sendArticles = sendArticles;
 module.exports.sendColumns = sendColumns;
 module.exports.generic = generic;
+module.exports.sendVideo = sendVideo;
