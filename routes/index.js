@@ -44,9 +44,6 @@ router.post('/webhook/', function (req, res) {
             text = event.message.text;
 
             switch (text) {
-                case "nyheder":
-                    fbapi.sendArticleMessage(sender);
-                    break;
                 case "generic":
                     fbapi.generic(sender);
                     break;
@@ -116,6 +113,21 @@ function handleIntent(intent, sender) {
             break;
         case "help":
             fbapi.sendText(sender, "Jeg kan hjælpe dig");
+            break;
+        case "artikler":
+            
+            try {
+                if(!consume.isEmpty(ArticleBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Seneste nyheder"), 500);
+                    timers.setTimeout(() => fbapi.sendArticleMessage(sender), 1000);
+                } else {
+                    console.log('Could not fetch articles');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste nyheder :(");
+            }
+
             break;
         default:
             fbapi.sendText(sender, "I dont understand");
