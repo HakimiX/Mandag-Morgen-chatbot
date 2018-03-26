@@ -63,6 +63,17 @@ router.post('/webhook/', function (req, res) {
         }
         if (event.postback) {
             let text = JSON.stringify(event.postback)
+            
+            // Handle postback text
+            switch (text) {
+                case "test":
+                    fbapi.sendText(sender, "test postback");
+                    break;
+                default:
+                    callWithAI(text, function (err, intent) {
+                        handleIntent(intent, sender);
+                    })
+            }
         }
     }
     res.sendStatus(200);
