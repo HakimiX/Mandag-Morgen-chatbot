@@ -114,6 +114,9 @@ function handleIntent(intent, sender) {
         case "help":
             fbapi.sendText(sender, "Jeg kan hjælpe dig");
             break;
+        case "klumme":
+            fbapi.sendText(sender, "seneste klummer");
+            break;
         case "artikler":
             
             try {
