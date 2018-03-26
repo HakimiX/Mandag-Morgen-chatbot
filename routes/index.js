@@ -13,8 +13,8 @@ var mysql = require('mysql');
 var token = "EAAF4c0kP0IoBAMqycdA1BtBuXZCQ1Q0bLnle0oqY00URRSzxZC1IIZAlZCcfkEfbOHrVJfAPN6U8EBOcvtUgrZB7lZBAYj8xDZC4EvA15kxZAP17ZAvXxhFFBT144G2HBToWwZAh2uZCqDLMjhgjEF4xaTTc1tNomkqsA8rw3s6e2FoitFtPcPrsUnj";
 
 // WIT AI
-var wit_endpoint = 'https://api.wit.ai/message?v=17032018&q=';
-var wit_token = '4MC3RLLHBHUK2YV5VRWMWJRBFGACPIZI';
+var wit_endpoint = 'https://api.wit.ai/message?v=20180129&q=';
+var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 
 // Fetch data
 consume.getArticles();
@@ -63,7 +63,7 @@ router.post('/webhook/', function (req, res) {
         }
         if (event.postback) {
             let text = JSON.stringify(event.postback)
-            
+
             // Handle postback text
             switch (text) {
                 case "test":
@@ -118,7 +118,7 @@ function handleIntent(intent, sender) {
             fbapi.sendText(sender, "Jeg kan hjælpe dig");
             break;
         default:
-            fbapi.sendText(sender, "Jeg forstår ikke");
+            fbapi.sendText(sender, "I dont understand");
             break;
     }
 }
