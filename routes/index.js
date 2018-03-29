@@ -48,6 +48,8 @@ router.post('/webhook/', function (req, res) {
                 case "generic":
                     fbapi.generic(sender);
                     break;
+                case "faktatjek":
+                    fbapi.sendFaktatjek(sender);
                 case "stop":
                     fbapi.sendText(sender, "jeg stopper");
                     break;
@@ -150,7 +152,7 @@ function handleIntent(intent, sender) {
 
             break;
         default:
-            fbapi.sendText(sender, "I dont understand");
+            fbapi.sendText(sender, "Jeg forstår desværre ikke!");
             break;
     }
 }

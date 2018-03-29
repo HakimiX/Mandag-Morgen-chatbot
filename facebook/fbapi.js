@@ -149,6 +149,60 @@ function sendColumns(sender) {
 }
 
 
+function sendFaktatjek(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Faktatjek 1",
+                    "subtitle": "Dato",
+                    "image_url": "https://www.mm.dk/images/article/13412/5128.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet",
+                        "title": "Læs mere"
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
+                    }],
+                }, {
+                    "title": "Faktatjek 2",
+                    "subtitle": "Dato",
+                    "image_url": "https://www.mm.dk/images/article/10278/5109.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.altinget.dk",
+                        "title": "Læs mere",
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function sendHelp(sender) {
     let messageData = {
         "text": "Jeg har følgende funktioner",
@@ -236,6 +290,7 @@ function generic(sender) {
     })
 }
 
+
 function sendVideo(sender) {
     let messageData = {
         "attachment": {
@@ -269,6 +324,7 @@ function sendVideo(sender) {
 module.exports.sendText = sendText;
 module.exports.sendArticles = sendArticles;
 module.exports.sendColumns = sendColumns;
+module.exports.sendFaktatjek = sendFaktatjek;
 module.exports.sendHelp = sendHelp;
 module.exports.generic = generic;
 module.exports.sendVideo = sendVideo;
