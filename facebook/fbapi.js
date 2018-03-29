@@ -22,6 +22,64 @@ function sendText(sender, text) {
 } 
 
 
+function sendSubscribed(sender) {
+    let messageData = {
+        "text": "Du er tilmeldt nyhedsbrevet!",
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Afmeld",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
+
+
+function sendNotSubscribed(sender) {
+    let messageData = {
+        "text": "Du er ikke tilmeldt nyhedsbrevet!",
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Tilmeld",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
+
+
 function sendArticles(sender) {
     let messageData = {
         "attachment": {
@@ -375,6 +433,8 @@ function sendVideo(sender) {
 }
 
 module.exports.sendText = sendText;
+module.exports.sendSubscribed = sendSubscribed;
+module.exports.sendNotSubscribed = sendNotSubscribed;
 module.exports.sendArticles = sendArticles;
 module.exports.sendColumns = sendColumns;
 module.exports.sendFaktatjek = sendFaktatjek;
