@@ -51,6 +51,9 @@ router.post('/webhook/', function (req, res) {
                 case "Faktatjek":
                     fbapi.sendFaktatjek(sender);
                     break;
+                case "Viralspiralen":
+                    fbapi.sendViralspiralen(sender);
+                    break;
                 case "stop":
                     fbapi.sendText(sender, "jeg stopper");
                     break;
