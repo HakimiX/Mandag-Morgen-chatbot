@@ -1,16 +1,26 @@
+// Imports
 var express = require('express');
 var request = require('request');
 var timers = require('timers');
 var schedule = require('node-schedule');
 var http = require('http');
+var mysql = require('mysql');
 var router = express.Router();
 
+// Files
 var fbapi = require('../facebook/fbapi');
 var consume = require('../api/consume');
 var graph = require('../api/graph');
 
-var mysql = require('mysql');
+// MySQL Connection
+var pool = mysql.createPool({
+    host: 'us-cdbr-iron-east-05.cleardb.net',
+    user: 'b24bc93e0b8ea5',
+    password : "a218d305",
+    database: 'heroku_9b459204a642844'
+});
 
+// Facebook Access Token
 var token = "EAAF4c0kP0IoBAMqycdA1BtBuXZCQ1Q0bLnle0oqY00URRSzxZC1IIZAlZCcfkEfbOHrVJfAPN6U8EBOcvtUgrZB7lZBAYj8xDZC4EvA15kxZAP17ZAvXxhFFBT144G2HBToWwZAh2uZCqDLMjhgjEF4xaTTc1tNomkqsA8rw3s6e2FoitFtPcPrsUnj";
 
 // WIT AI
@@ -20,6 +30,7 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 // Fetch data
 consume.getArticles();
 graph.getFBVideos();
+
 
 // GET Home page
 router.get('/', function (req, res, next) {
@@ -54,6 +65,36 @@ router.post('/webhook/', function (req, res) {
                     break;
                 case "Viralspiralen":
                     fbapi.sendViralspiralen(sender);
+                    break;
+                case "db":
+
+                    pool.getConnection(function (err, connection) {
+                        // Use connection
+                        var select = connection.query("SELECT * FROM users", function (err, result) {
+
+                            // Return connection back to pool to be used by someone else
+                            connection.release();
+
+                            if (err) {
+                                console.log(err);
+                                return
+                            }
+                            console.log(select.sql);
+                            console.log(result);
+                            for (var i = 0; i < result.length; i++) {
+                                fbapi.sendText(sender, "Row: \n" + result[i].id + " : " + result[i].fb_id);
+                            }
+                        });
+                    });
+
+                    break;
+                case "Tilmeld":
+                    subscribeUser(sender);
+                    fbapi.sendText(sender, "Du er tilmeldt! 🙌");
+                    break;
+                case "Afmeld":
+                    unsubscribeUse(sender);
+                    fbapi.sendText(sender, "Du er afmeldt! 😔");
                     break;
                 case "stop":
                     fbapi.sendText(sender, "jeg stopper");
@@ -160,6 +201,70 @@ function handleIntent(intent, sender) {
             fbapi.sendText(sender, "Jeg forstår desværre ikke!");
             break;
     }
+}
+
+
+function subscribeUser(id) {
+    pool.getConnection(function (err, connection) {
+        var insert = connection.query("INSERT INTO users (fb_id) SELECT * FROM (SELECT '" + id + "') AS tmp WHERE NOT EXISTS (SELECT fb_id FROM users WHERE fb_id = '" + id + "') LIMIT 1", function (err, result) {
+            // Release connection
+            connection.release();
+
+            if (err) {
+                console.log(err);
+                return
+            }
+
+            console.log(insert.sql);
+            console.log(result);
+        });
+    });
+}
+
+
+function unsubscribeUse(id) {
+    pool.getConnection(function (err, connection) {
+        var remove = connection.query('DELETE FROM users where fb_id = ?', id, function (err, result) {
+            // Release connection
+            connection.release();
+
+            if (err) {
+                console.log(err);
+                return
+            }
+
+            console.log(remove.sql);
+            console.log(result);
+        });
+    });
+}
+
+
+function checkSubsribtion(id) {
+    pool.getConnection(function (err, connection) {
+        var check = connection.query('SELECT fb_id FROM users where fb_id = ?', id, function (err, result) {
+            // Release connection
+            connection.release();
+
+            if (err) {
+                console.log(err);
+                return
+            }
+
+            console.log(check.sql);
+            console.log(result);
+
+            // If user exists
+
+            if (!consume.isEmpty(result)) {
+                fbapi.sendSubscribed(sender);
+            } else if (consume.isEmpty(result)) {
+                fbapi.sendNotSubscribed(sender);
+            }
+
+        });
+    });
+    
 }
 
 
