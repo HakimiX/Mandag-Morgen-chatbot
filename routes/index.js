@@ -163,6 +163,9 @@ function handleIntent(intent, sender) {
         case "help":
             fbapi.sendHelp(sender);
             break;
+        case "subscribtion":
+            checkSubsribtion(sender);
+            break;
         case "video":
 
             try {
