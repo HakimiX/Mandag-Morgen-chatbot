@@ -12,7 +12,7 @@ global.FBvideoBodyObj;
 
 function getFBVideos(sender) {
     FB.api(
-        '/Altingetdk/videos/',
+        '/tjekdetdk/videos/',
         'GET', {},
         function (response) {
             FBvideoBodyObj = response;
