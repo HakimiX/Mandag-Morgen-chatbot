@@ -201,7 +201,7 @@ function handleIntent(intent, sender) {
 
             break;
         default:
-            fbapi.sendText(sender, "Jeg forstår desværre ikke!");
+            fbapi.sendWitDefault(sender);
             break;
     }
 }

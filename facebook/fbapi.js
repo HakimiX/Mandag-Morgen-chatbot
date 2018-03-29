@@ -348,6 +348,55 @@ function sendHelp(sender) {
 }
 
 
+function sendWitDefault(sender) {
+    let messageData = {
+        "text": "Jeg forstår ikke hvad du mener!",
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Nyheder",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Video",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Faktatjek",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Viralspiralen",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
+
+
 function generic(sender) {
     let messageData = {
         "attachment": {
@@ -440,5 +489,6 @@ module.exports.sendColumns = sendColumns;
 module.exports.sendFaktatjek = sendFaktatjek;
 module.exports.sendViralspiralen = sendViralspiralen;
 module.exports.sendHelp = sendHelp;
+module.exports.sendWitDefault = sendWitDefault;
 module.exports.generic = generic;
 module.exports.sendVideo = sendVideo;
