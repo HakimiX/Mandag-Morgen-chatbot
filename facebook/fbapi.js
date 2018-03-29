@@ -216,6 +216,11 @@ function sendHelp(sender) {
                 "content_type":"text",
                 "title":"Klummer",
                 "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Faktatjek",
+                "payload":"<POSTBACK_PAYLOAD>"
             }
         ]
     }

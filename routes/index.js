@@ -48,8 +48,9 @@ router.post('/webhook/', function (req, res) {
                 case "generic":
                     fbapi.generic(sender);
                     break;
-                case "faktatjek":
+                case "Faktatjek":
                     fbapi.sendFaktatjek(sender);
+                    break;
                 case "stop":
                     fbapi.sendText(sender, "jeg stopper");
                     break;
