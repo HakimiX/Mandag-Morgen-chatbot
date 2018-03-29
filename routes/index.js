@@ -19,6 +19,7 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 
 // Fetch data
 consume.getArticles();
+graph.getFBVideos();
 
 // GET Home page
 router.get('/', function (req, res, next) {
