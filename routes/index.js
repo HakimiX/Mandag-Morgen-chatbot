@@ -113,7 +113,7 @@ function handleIntent(intent, sender) {
             fbapi.sendText(sender, "Hej, hvad kan jeg hjælpe dig med?");
             break;
         case "help":
-            fbapi.sendText(sender, "Jeg kan hjælpe dig");
+            fbapi.sendHelp(sender);
             break;
         case "video":
 

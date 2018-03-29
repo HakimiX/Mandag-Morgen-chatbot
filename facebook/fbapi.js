@@ -149,6 +149,40 @@ function sendColumns(sender) {
 }
 
 
+function sendHelp(sender) {
+    let messageData = {
+        "text": "Jeg har følgende funktioner",
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Nyheder",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
+
+
 function generic(sender) {
     let messageData = {
         "attachment": {
@@ -235,5 +269,6 @@ function sendVideo(sender) {
 module.exports.sendText = sendText;
 module.exports.sendArticles = sendArticles;
 module.exports.sendColumns = sendColumns;
+module.exports.sendHelp = sendHelp;
 module.exports.generic = generic;
 module.exports.sendVideo = sendVideo;
