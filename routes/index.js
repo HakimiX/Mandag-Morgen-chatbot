@@ -33,7 +33,7 @@ graph.getFBVideos();
 
 
 // Hour ahead - 16:00 => 17:00
-var scheduleMessage = schedule.scheduleJob(" 14 16 * * *", function () {
+var scheduleMessage = schedule.scheduleJob(" 16 15 * * *", function () {
     console.log("Send message to all subscribers");
 
     pool.getConnection(function (err, connection) {
@@ -52,7 +52,7 @@ var scheduleMessage = schedule.scheduleJob(" 14 16 * * *", function () {
             console.log(result);
 
             for (var i = 0; i < result.length; i++) {
-                fbapi.sendText(result[i].fb_id, "Nyhedsbrev Test");
+                fbapi.sendText(result[i].fb_id, "Mandag Morgen Nyhedsbrev Test");
             }
 
         });
