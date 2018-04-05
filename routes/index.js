@@ -32,7 +32,7 @@ consume.getArticles();
 graph.getFBVideos();
 
 
-// Hour ahead - 16:00 => 17:00
+// 2 Hours ahead - 15:00 => 17:00
 var scheduleMessage = schedule.scheduleJob(" 16 15 * * *", function () {
     console.log("Send message to all subscribers");
 
@@ -67,12 +67,14 @@ router.get('/', function (req, res, next) {
     });
 });
 
+
 router.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === 'verify_me') {
         res.send(req.query['hub.challenge']);
     }
     res.send('Error, wrong validation token');
 });
+
 
 router.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging;
@@ -211,7 +213,7 @@ function callWithAI(query, callback) {
 function handleIntent(intent, sender) {
     switch (intent) {
         case "greeting":
-            fbapi.sendText(sender, "Hej, hvad kan jeg hjælpe dig med?");
+            fbapi.sendBegin(sender);
             break;
         case "help":
             fbapi.sendHelp(sender);

@@ -22,6 +22,55 @@ function sendText(sender, text) {
 } 
 
 
+function sendBegin(sender) {
+    let messageData = {
+        "text": "Velkommen til Mandag Morgen!",
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Nyheder",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Video",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Faktatjek",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Viralspiralen",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+}
+
+
 function sendSubscribed(sender) {
     let messageData = {
         "text": "Du er tilmeldt nyhedsbrevet!",
@@ -482,6 +531,7 @@ function sendVideo(sender) {
 }
 
 module.exports.sendText = sendText;
+module.exports.sendBegin = sendBegin;
 module.exports.sendSubscribed = sendSubscribed;
 module.exports.sendNotSubscribed = sendNotSubscribed;
 module.exports.sendArticles = sendArticles;
