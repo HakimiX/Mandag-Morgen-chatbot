@@ -88,6 +88,31 @@ router.post('/webhook/', function (req, res) {
                     });
 
                     break;
+                case "notify":
+
+                    pool.getConnection(function (err, connection) {
+                        // Use connection 
+                        var select = connection.query("SELECT fb_id FROM users", function (err, result) {
+
+                            // Return connection back to pool to be used by someone else
+                            connection.release();
+
+                            if (err) {
+                                console.log(err);
+                                return
+                            }
+
+                            console.log(select.sql);
+                            console.log(result);
+
+                            for (var i = 0; i < result.length; i++) {
+                                sender = result[i].fb_id;
+                                fbapi.sendText(result[i].fb_id, "All subscribers notified");
+                            }
+                        });
+                    });
+                    
+                    break;
                 case "Tilmeld":
                     subscribeUser(sender);
                     fbapi.sendText(sender, "Du er tilmeldt! 🙌");
