@@ -32,6 +32,34 @@ consume.getArticles();
 graph.getFBVideos();
 
 
+// Hour ahead - 16:00 => 17:00
+var scheduleMessage = schedule.scheduleJob(" 14 16 * * *", function () {
+    console.log("Send message to all subscribers");
+
+    pool.getConnection(function (err, connection) {
+        // Use connection 
+        var select = connection.query("SELECT fb_id FROM users", function (err, result) {
+
+            // Return connection back to pool to be used by someone else
+            connection.release();
+
+            if (err) {
+                console.log(err);
+                return
+            }
+
+            console.log(select.sql);
+            console.log(result);
+
+            for (var i = 0; i < result.length; i++) {
+                fbapi.sendText(result[i].fb_id, "Nyhedsbrev Test");
+            }
+
+        });
+    });
+});
+
+
 // GET Home page
 router.get('/', function (req, res, next) {
     res.render('index', {
@@ -111,7 +139,7 @@ router.post('/webhook/', function (req, res) {
                             }
                         });
                     });
-                    
+
                     break;
                 case "Tilmeld":
                     subscribeUser(sender);
