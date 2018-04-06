@@ -11,7 +11,7 @@ function getArticles() {
     var options = {
         host: 'altingetpraktik.azurewebsites.net',
         port: 80,
-        path: '/Articles/GetArticles',
+        path: '/mmArticle/GetArticles',
         method: 'GET'
     };
 
