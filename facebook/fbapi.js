@@ -421,6 +421,79 @@ function sendVaerdAtVide(sender) {
 }
 
 
+function sendPerspektiv(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": PerspektivBodyObj[0].Headline,
+                    "subtitle": PerspektivBodyObj[0].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + PerspektivBodyObj[0].RelArticlePictureArticle + "/" + PerspektivBodyObj[0].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + PerspektivBodyObj[0].UrlKey,
+                        "title": "Læs mere"
+                    }],
+                }, {
+                    "title": PerspektivBodyObj[1].Headline,
+                    "subtitle": PerspektivBodyObj[1].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + PerspektivBodyObj[1].RelArticlePictureArticle + "/" + PerspektivBodyObj[1].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + PerspektivBodyObj[1].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": PerspektivBodyObj[2].Headline,
+                    "subtitle": PerspektivBodyObj[2].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + PerspektivBodyObj[2].RelArticlePictureArticle + "/" + PerspektivBodyObj[2].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + PerspektivBodyObj[2].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": PerspektivBodyObj[3].Headline,
+                    "subtitle": PerspektivBodyObj[3].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + PerspektivBodyObj[3].RelArticlePictureArticle + "/" + PerspektivBodyObj[3].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + PerspektivBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": PerspektivBodyObj[4].Headline,
+                    "subtitle": PerspektivBodyObj[4].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + PerspektivBodyObj[4].RelArticlePictureArticle + "/" + PerspektivBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + PerspektivBodyObj[4].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function sendColumns(sender) {
     let messageData = {
         "attachment": {
@@ -685,6 +758,7 @@ module.exports.sendArticles = sendArticles;
 module.exports.sendFaktatjek = sendFaktatjek;
 module.exports.sendViralspiralen = sendViralspiralen;
 module.exports.sendVaerdAtVide = sendVaerdAtVide;
+module.exports.sendPerspektiv = sendPerspektiv;
 module.exports.sendColumns = sendColumns;
 
 module.exports.sendHelp = sendHelp;

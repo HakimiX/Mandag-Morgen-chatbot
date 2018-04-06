@@ -29,20 +29,13 @@ var wit_endpoint = 'https://api.wit.ai/message?v=20180129&q=';
 var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 
 // Fetch data
-//consume.getArticles();
-//consume.getFaktatjek();
-//consume.getViralspiralen();
-//consume.getVaerdAtVide();
-//consume.getColumns();
-//graph.getFBVideos();
-
 buffer.cacheArticle();
 buffer.cacheFaktatjek();
 buffer.cacheViralspiralen();
 buffer.cacheVaerdAtVide();
+buffer.cachePerspektiv();
 buffer.cacheColumns();
 buffer.cacheFBVideos();
-
 
 // 2 Hours ahead - 15:00 => 17:00
 var scheduleMessage = schedule.scheduleJob(" 16 15 * * *", function () {
@@ -110,6 +103,9 @@ router.post('/webhook/', function (req, res) {
                     break;
                 case "værdatvide":
                     fbapi.sendVaerdAtVide(sender);
+                    break;
+                case "perspektiv":
+                    fbapi.sendPerspektiv(sender);
                     break;
                 case "klummer":
                     fbapi.sendColumns(sender);

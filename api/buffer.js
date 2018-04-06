@@ -44,6 +44,13 @@ function cacheColumns() {
     });
 }
 
+function cachePerspektiv() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume Perspektiv --- ');
+        consume.getPerspektiv();
+    });
+}
+
 function cacheFBVideos() {
     var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
         console.log(' --- API Consume FB Videos --- ');
@@ -60,4 +67,5 @@ module.exports.cacheFaktatjek = cacheFaktatjek;
 module.exports.cacheViralspiralen = cacheViralspiralen;
 module.exports.cacheVaerdAtVide = cacheVaerdAtVide;
 module.exports.cacheColumns = cacheColumns;
+module.exports.cachePerspektiv = cachePerspektiv;
 module.exports.cacheFBVideos = cacheFBVideos;
