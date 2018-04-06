@@ -16,4 +16,48 @@ function cacheArticle() {
     });
 }
 
+function cacheFaktatjek() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume Faktatjek --- ');
+        consume.getFaktatjek();
+    });
+}
+
+function cacheViralspiralen() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume Viralspiralen --- ');
+        consume.getViralspiralen();
+    });
+}
+
+function cacheVaerdAtVide() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume Værd at vide --- ');
+        consume.getVaerdAtVide();
+    });
+}
+
+function cacheColumns() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume Columns --- ');
+        consume.getColumns();
+    });
+}
+
+function cacheFBVideos() {
+    var scheduleAPIConsume = schedule.scheduleJob("*/1 * * * *", function() {
+        console.log(' --- API Consume FB Videos --- ');
+        graph.getFBVideos();
+    });
+}
+
+
+
+
+
 module.exports.cacheArticle = cacheArticle;
+module.exports.cacheFaktatjek = cacheFaktatjek;
+module.exports.cacheViralspiralen = cacheViralspiralen;
+module.exports.cacheVaerdAtVide = cacheVaerdAtVide;
+module.exports.cacheColumns = cacheColumns;
+module.exports.cacheFBVideos = cacheFBVideos;

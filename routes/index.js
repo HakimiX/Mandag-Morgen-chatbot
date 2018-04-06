@@ -37,6 +37,11 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 //graph.getFBVideos();
 
 buffer.cacheArticle();
+buffer.cacheFaktatjek();
+buffer.cacheViralspiralen();
+buffer.cacheVaerdAtVide();
+buffer.cacheColumns();
+buffer.cacheFBVideos();
 
 
 // 2 Hours ahead - 15:00 => 17:00
