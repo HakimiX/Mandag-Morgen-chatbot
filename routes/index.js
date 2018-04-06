@@ -28,7 +28,8 @@ var wit_endpoint = 'https://api.wit.ai/message?v=20180129&q=';
 var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 
 // Fetch data
-consume.getArticles();
+//consume.getArticles();
+consume.getFaktatjek();
 graph.getFBVideos();
 
 
@@ -92,9 +93,6 @@ router.post('/webhook/', function (req, res) {
                     break;
                 case "Faktatjek":
                     fbapi.sendFaktatjek(sender);
-                    break;
-                case "Viralspiralen":
-                    fbapi.sendViralspiralen(sender);
                     break;
                 case "db":
 
@@ -235,10 +233,6 @@ function handleIntent(intent, sender) {
                 fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste videoer :(");
             }
 
-            break;
-        case "klumme":
-            timers.setTimeout(() => fbapi.sendText(sender, "Seneste Klummer"), 500);
-            timers.setTimeout(() => fbapi.sendColumns(sender), 1000);
             break;
         case "artikler":
             

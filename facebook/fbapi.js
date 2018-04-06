@@ -202,60 +202,6 @@ function sendArticles(sender) {
 }
 
 
-function sendColumns(sender) {
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Klumme 1",
-                    "subtitle": "dato",
-                    "image_url": "https://i.imgur.com/FCTSI9J.jpg",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.altinget.dk",
-                        "title": "Read more"
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
-                    }],
-                }, {
-                    "title": "Klumme 2",
-                    "subtitle": "dato",
-                    "image_url": "https://i.imgur.com/dNo2ZB5.jpg",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.altinget.dk",
-                        "title": "Read more",
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for second element in a generic bubble",
-                    }],
-                }]
-            }
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.11/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
-
-
 function sendFaktatjek(sender) {
     let messageData = {
         "attachment": {
@@ -263,67 +209,48 @@ function sendFaktatjek(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Faktatjek 1",
-                    "subtitle": "Dato",
-                    "image_url": "https://www.mm.dk/images/article/13412/5128.jpg",
+                    "title": FaktatjekBodyObj[0].Headline,
+                    "subtitle": FaktatjekBodyObj[0].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + FaktatjekBodyObj[0].RelArticlePictureArticle + "/" + FaktatjekBodyObj[0].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.mm.dk/tjekdet",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + FaktatjekBodyObj[0].UrlKey,
                         "title": "Læs mere"
                     }],
                 }, {
-                    "title": "Faktatjek 2",
-                    "subtitle": "Dato",
-                    "image_url": "https://www.mm.dk/images/article/10278/5109.jpg",
+                    "title": FaktatjekBodyObj[1].Headline,
+                    "subtitle": FaktatjekBodyObj[1].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + FaktatjekBodyObj[1].RelArticlePictureArticle + "/" + FaktatjekBodyObj[1].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + FaktatjekBodyObj[1].UrlKey,
                         "title": "Læs mere",
                     }],
-                }]
-            }
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.11/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
-
-
-function sendViralspiralen(sender) {
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Viral 1",
-                    "subtitle": "Dato",
-                    "image_url": "https://www.mm.dk/images/article/13339/4687.jpg",
+                }, {
+                    "title": FaktatjekBodyObj[2].Headline,
+                    "subtitle": FaktatjekBodyObj[2].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + FaktatjekBodyObj[2].RelArticlePictureArticle + "/" + FaktatjekBodyObj[2].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.mm.dk/tjekdet",
-                        "title": "Læs mere"
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + FaktatjekBodyObj[2].UrlKey,
+                        "title": "Læs mere",
                     }],
                 }, {
-                    "title": "Viral 2",
-                    "subtitle": "Dato",
-                    "image_url": "https://www.mm.dk/images/article/13054/4532.jpg",
+                    "title": FaktatjekBodyObj[3].Headline,
+                    "subtitle": FaktatjekBodyObj[3].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + FaktatjekBodyObj[3].RelArticlePictureArticle + "/" + FaktatjekBodyObj[3].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + FaktatjekBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": FaktatjekBodyObj[4].Headline,
+                    "subtitle": FaktatjekBodyObj[4].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + FaktatjekBodyObj[4].RelArticlePictureArticle + "/" + FaktatjekBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + FaktatjekBodyObj[4].UrlKey,
                         "title": "Læs mere",
                     }],
                 }]
@@ -534,10 +461,10 @@ module.exports.sendText = sendText;
 module.exports.sendBegin = sendBegin;
 module.exports.sendSubscribed = sendSubscribed;
 module.exports.sendNotSubscribed = sendNotSubscribed;
+
 module.exports.sendArticles = sendArticles;
-module.exports.sendColumns = sendColumns;
 module.exports.sendFaktatjek = sendFaktatjek;
-module.exports.sendViralspiralen = sendViralspiralen;
+
 module.exports.sendHelp = sendHelp;
 module.exports.sendWitDefault = sendWitDefault;
 module.exports.generic = generic;
