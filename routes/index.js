@@ -30,7 +30,8 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 // Fetch data
 //consume.getArticles();
 //consume.getFaktatjek();
-consume.getViralspiralen();
+//consume.getViralspiralen();
+consume.getVaerdAtVide();
 graph.getFBVideos();
 
 
@@ -97,6 +98,9 @@ router.post('/webhook/', function (req, res) {
                     break;
                 case "Viralspiralen":
                     fbapi.sendViralspiralen(sender);
+                    break;
+                case "værdatvide":
+                    fbapi.sendVaerdAtVide(sender);
                     break;
                 case "db":
 

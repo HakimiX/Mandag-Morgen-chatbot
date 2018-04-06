@@ -7,6 +7,7 @@ var http = require('http');
 global.ArticleBodyObj;
 global.FaktatjekBodyObj;
 global.ViralspiralenBodyObj;
+global.VaerdAtVideBodyObj;
 
 // API - GET Articles
 function getArticles() {
@@ -77,6 +78,31 @@ function getViralspiralen() {
     }).end();
 }
 
+// API - GET Værd At Vide
+function getVaerdAtVide() {
+    var options = {
+        host: 'altingetpraktik.azurewebsites.net',
+        port: 80,
+        path: '/mmArticle/GetVaerdAtVide',
+        method: 'GET'
+    };
+
+    http.request(options, function (res) {
+        var body = '';
+
+        res.on('data', function (chunk) {
+            body += chunk;
+        });
+
+        res.on('end', function () {
+            VaerdAtVideBodyObj = JSON.parse(body);
+            console.log(VaerdAtVideBodyObj);
+        })
+    }).end();
+}
+
+
+
 function isEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
@@ -87,5 +113,6 @@ function isEmpty(obj) {
 
 module.exports.getArticles = getArticles;
 module.exports.getFaktatjek = getFaktatjek;
-module.exports.getViralspiralen = getViralspiralen
+module.exports.getViralspiralen = getViralspiralen;
+module.exports.getVaerdAtVide = getVaerdAtVide;
 module.exports.isEmpty = isEmpty;

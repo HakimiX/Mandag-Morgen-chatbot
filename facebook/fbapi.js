@@ -348,6 +348,79 @@ function sendViralspiralen(sender) {
 }
 
 
+function sendVaerdAtVide(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": VaerdAtVideBodyObj[0].Headline,
+                    "subtitle": VaerdAtVideBodyObj[0].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + VaerdAtVideBodyObj[0].RelArticlePictureArticle + "/" + VaerdAtVideBodyObj[0].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + VaerdAtVideBodyObj[0].UrlKey,
+                        "title": "Læs mere"
+                    }],
+                }, {
+                    "title": VaerdAtVideBodyObj[1].Headline,
+                    "subtitle": VaerdAtVideBodyObj[1].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + VaerdAtVideBodyObj[1].RelArticlePictureArticle + "/" + VaerdAtVideBodyObj[1].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + VaerdAtVideBodyObj[1].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": VaerdAtVideBodyObj[2].Headline,
+                    "subtitle": VaerdAtVideBodyObj[2].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + VaerdAtVideBodyObj[2].RelArticlePictureArticle + "/" + VaerdAtVideBodyObj[2].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + VaerdAtVideBodyObj[2].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": VaerdAtVideBodyObj[3].Headline,
+                    "subtitle": VaerdAtVideBodyObj[3].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + VaerdAtVideBodyObj[3].RelArticlePictureArticle + "/" + VaerdAtVideBodyObj[3].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + VaerdAtVideBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": VaerdAtVideBodyObj[4].Headline,
+                    "subtitle": VaerdAtVideBodyObj[4].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + VaerdAtVideBodyObj[4].RelArticlePictureArticle + "/" + VaerdAtVideBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + VaerdAtVideBodyObj[4].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function sendHelp(sender) {
     let messageData = {
         "text": "Jeg har følgende funktioner",
@@ -538,6 +611,7 @@ module.exports.sendNotSubscribed = sendNotSubscribed;
 module.exports.sendArticles = sendArticles;
 module.exports.sendFaktatjek = sendFaktatjek;
 module.exports.sendViralspiralen = sendViralspiralen;
+module.exports.sendVaerdAtVide = sendVaerdAtVide;
 
 module.exports.sendHelp = sendHelp;
 module.exports.sendWitDefault = sendWitDefault;
