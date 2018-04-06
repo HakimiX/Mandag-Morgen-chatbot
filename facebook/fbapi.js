@@ -138,46 +138,46 @@ function sendArticles(sender) {
                 "elements": [{
                     "title": ArticleBodyObj[0].Headline,
                     "subtitle": ArticleBodyObj[0].CreateTime,
-                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[0].RelArticlePictureArticle + "/" + ArticleBodyObj[0].Picture + ".jpg",
+                    "image_url": "https://www.mm.dk/images/article/" + ArticleBodyObj[0].RelArticlePictureArticle + "/" + ArticleBodyObj[0].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[0].UrlKey,
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ArticleBodyObj[0].UrlKey,
                         "title": "Læs mere"
                     }],
                 }, {
                     "title": ArticleBodyObj[1].Headline,
                     "subtitle": ArticleBodyObj[1].CreateTime,
-                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[1].RelArticlePictureArticle + "/" + ArticleBodyObj[1].Picture + ".jpg",
+                    "image_url": "https://www.mm.dk/images/article/" + ArticleBodyObj[1].RelArticlePictureArticle + "/" + ArticleBodyObj[1].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[1].UrlKey,
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ArticleBodyObj[1].UrlKey,
                         "title": "Læs mere",
                     }],
                 }, {
                     "title": ArticleBodyObj[2].Headline,
                     "subtitle": ArticleBodyObj[2].CreateTime,
-                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[2].RelArticlePictureArticle + "/" + ArticleBodyObj[2].Picture + ".jpg",
+                    "image_url": "https://www.mm.dk/images/article/" + ArticleBodyObj[2].RelArticlePictureArticle + "/" + ArticleBodyObj[2].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[2].UrlKey,
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ArticleBodyObj[2].UrlKey,
                         "title": "Læs mere",
                     }],
                 }, {
                     "title": ArticleBodyObj[3].Headline,
                     "subtitle": ArticleBodyObj[3].CreateTime,
-                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[3].RelArticlePictureArticle + "/" + ArticleBodyObj[3].Picture + ".jpg",
+                    "image_url": "https://www.mm.dk/images/article/" + ArticleBodyObj[3].RelArticlePictureArticle + "/" + ArticleBodyObj[3].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[3].UrlKey,
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ArticleBodyObj[3].UrlKey,
                         "title": "Læs mere",
                     }],
                 }, {
                     "title": ArticleBodyObj[4].Headline,
                     "subtitle": ArticleBodyObj[4].CreateTime,
-                    "image_url": "https://www.altinget.dk/images/article/" + ArticleBodyObj[4].RelArticlePictureArticle + "/" + ArticleBodyObj[4].Picture + ".jpg",
+                    "image_url": "https://www.mm.dk/images/article/" + ArticleBodyObj[4].RelArticlePictureArticle + "/" + ArticleBodyObj[4].Picture + ".jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.altinget.dk/artikel/" + ArticleBodyObj[4].UrlKey,
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ArticleBodyObj[4].UrlKey,
                         "title": "Læs mere",
                     }],
                 }]
