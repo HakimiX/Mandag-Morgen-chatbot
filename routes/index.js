@@ -11,6 +11,7 @@ var router = express.Router();
 var fbapi = require('../facebook/fbapi');
 var consume = require('../api/consume');
 var graph = require('../api/graph');
+var buffer = require('../api/buffer');
 
 // MySQL Connection
 var pool = mysql.createPool({
@@ -32,8 +33,10 @@ var wit_token = 'JXUVJCEJC73J72LFJ7YDYHDEAGLF2POW';
 //consume.getFaktatjek();
 //consume.getViralspiralen();
 //consume.getVaerdAtVide();
-consume.getColumns();
-graph.getFBVideos();
+//consume.getColumns();
+//graph.getFBVideos();
+
+buffer.cacheArticle();
 
 
 // 2 Hours ahead - 15:00 => 17:00
