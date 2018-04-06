@@ -275,6 +275,79 @@ function sendFaktatjek(sender) {
 }
 
 
+function sendViralspiralen(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": ViralspiralenBodyObj[0].Headline,
+                    "subtitle": ViralspiralenBodyObj[0].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ViralspiralenBodyObj[0].RelArticlePictureArticle + "/" + ViralspiralenBodyObj[0].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ViralspiralenBodyObj[0].UrlKey,
+                        "title": "Læs mere"
+                    }],
+                }, {
+                    "title": ViralspiralenBodyObj[1].Headline,
+                    "subtitle": ViralspiralenBodyObj[1].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ViralspiralenBodyObj[1].RelArticlePictureArticle + "/" + ViralspiralenBodyObj[1].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ViralspiralenBodyObj[1].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ViralspiralenBodyObj[2].Headline,
+                    "subtitle": ViralspiralenBodyObj[2].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ViralspiralenBodyObj[2].RelArticlePictureArticle + "/" + ViralspiralenBodyObj[2].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ViralspiralenBodyObj[2].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ViralspiralenBodyObj[3].Headline,
+                    "subtitle": ViralspiralenBodyObj[3].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ViralspiralenBodyObj[3].RelArticlePictureArticle + "/" + ViralspiralenBodyObj[3].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ViralspiralenBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ViralspiralenBodyObj[4].Headline,
+                    "subtitle": ViralspiralenBodyObj[4].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ViralspiralenBodyObj[4].RelArticlePictureArticle + "/" + ViralspiralenBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ViralspiralenBodyObj[4].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function sendHelp(sender) {
     let messageData = {
         "text": "Jeg har følgende funktioner",
@@ -464,6 +537,7 @@ module.exports.sendNotSubscribed = sendNotSubscribed;
 
 module.exports.sendArticles = sendArticles;
 module.exports.sendFaktatjek = sendFaktatjek;
+module.exports.sendViralspiralen = sendViralspiralen;
 
 module.exports.sendHelp = sendHelp;
 module.exports.sendWitDefault = sendWitDefault;
