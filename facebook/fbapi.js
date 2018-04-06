@@ -38,17 +38,27 @@ function sendBegin(sender) {
             },
             {
                 "content_type":"text",
-                "title":"Klummer",
-                "payload":"<POSTBACK_PAYLOAD>"
-            },
-            {
-                "content_type":"text",
                 "title":"Faktatjek",
                 "payload":"<POSTBACK_PAYLOAD>"
             },
             {
                 "content_type":"text",
                 "title":"Viralspiralen",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Værd at vide",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Perspektiv",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
                 "payload":"<POSTBACK_PAYLOAD>"
             }
         ]
@@ -583,17 +593,27 @@ function sendHelp(sender) {
             },
             {
                 "content_type":"text",
-                "title":"Klummer",
-                "payload":"<POSTBACK_PAYLOAD>"
-            },
-            {
-                "content_type":"text",
                 "title":"Faktatjek",
                 "payload":"<POSTBACK_PAYLOAD>"
             },
             {
                 "content_type":"text",
                 "title":"Viralspiralen",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Værd at vide",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Perspektiv",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
                 "payload":"<POSTBACK_PAYLOAD>"
             }
         ]
