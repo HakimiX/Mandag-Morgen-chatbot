@@ -95,23 +95,7 @@ router.post('/webhook/', function (req, res) {
                 case "generic":
                     fbapi.generic(sender);
                     break;
-                case "Faktatjek":
-                    fbapi.sendFaktatjek(sender);
-                    break;
-                case "Viralspiralen":
-                    fbapi.sendViralspiralen(sender);
-                    break;
-                case "værdatvide":
-                    fbapi.sendVaerdAtVide(sender);
-                    break;
-                case "perspektiv":
-                    fbapi.sendPerspektiv(sender);
-                    break;
-                case "klummer":
-                    fbapi.sendColumns(sender);
-                    break;
                 case "db":
-
                     pool.getConnection(function (err, connection) {
                         // Use connection
                         var select = connection.query("SELECT * FROM users", function (err, result) {
@@ -130,10 +114,8 @@ router.post('/webhook/', function (req, res) {
                             }
                         });
                     });
-
                     break;
                 case "notify":
-
                     pool.getConnection(function (err, connection) {
                         // Use connection 
                         var select = connection.query("SELECT fb_id FROM users", function (err, result) {
@@ -155,7 +137,6 @@ router.post('/webhook/', function (req, res) {
                             }
                         });
                     });
-
                     break;
                 case "Tilmeld":
                     subscribeUser(sender);
@@ -262,6 +243,81 @@ function handleIntent(intent, sender) {
             } catch (error) {
                 console.log(error);
                 fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste nyheder :(");
+            }
+
+            break;
+        case "faktatjek":
+
+            try {
+                if(!consume.isEmpty(FaktatjekBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Seneste faktatjek"), 500);
+                    timers.setTimeout(() => fbapi.sendFaktatjek(sender), 1000);
+                } else {
+                    console.log('Could not fetch faktatjek');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste faktatjek :(");
+            }
+            
+            break;
+        case "viral":
+
+            try {
+                if(!consume.isEmpty(ViralspiralenBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Seneste virale nyheder"), 500);
+                    timers.setTimeout(() => fbapi.sendViralspiralen(sender), 1000);
+                } else {
+                    console.log('Could not fetch viralspiralen');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste viralspiral :(");
+            }
+
+            break;
+        case "værdAtVide":
+        
+            try {
+                if(!consume.isEmpty(VaerdAtVideBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Seneste værd at vide"), 500);
+                    timers.setTimeout(() => fbapi.sendVaerdAtVide(sender), 1000);
+                } else {
+                    console.log('Could not fetch værd at vide');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste værd at vide :(");
+            }
+
+            break;
+        case "perspektiv":
+
+            try {
+                if(!consume.isEmpty(PerspektivBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Seneste perspektiv"), 500);
+                    timers.setTimeout(() => fbapi.sendPerspektiv(sender), 1000);
+                } else {
+                    console.log('Could not fetch perspektiv');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste perspektiv :(");
+            }
+
+            break;
+        case "klumme":
+
+            try {
+                if(!consume.isEmpty(ColumnsBodyObj)) {
+                    timers.setTimeout(() => fbapi.sendText(sender, "Her er seneste klummer"), 500);
+                    timers.setTimeout(() => fbapi.sendColumns(sender), 1000);
+                } else {
+                    console.log('Could not fetch columns');
+                }
+            } catch (error) {
+                console.log(error);
+                fbapi.sendText(sender, "Jeg kunne desværre ikke hente seneste klummer :(");
             }
 
             break;
