@@ -421,6 +421,79 @@ function sendVaerdAtVide(sender) {
 }
 
 
+function sendColumns(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": ColumnsBodyObj[0].Headline,
+                    "subtitle": ColumnsBodyObj[0].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ColumnsBodyObj[0].RelArticlePictureArticle + "/" + ColumnsBodyObj[0].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ColumnsBodyObj[0].UrlKey,
+                        "title": "Læs mere"
+                    }],
+                }, {
+                    "title": ColumnsBodyObj[1].Headline,
+                    "subtitle": ColumnsBodyObj[1].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ColumnsBodyObj[1].RelArticlePictureArticle + "/" + ColumnsBodyObj[1].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ColumnsBodyObj[1].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ColumnsBodyObj[2].Headline,
+                    "subtitle": ColumnsBodyObj[2].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ColumnsBodyObj[2].RelArticlePictureArticle + "/" + ColumnsBodyObj[2].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ColumnsBodyObj[2].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ColumnsBodyObj[3].Headline,
+                    "subtitle": ColumnsBodyObj[3].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ColumnsBodyObj[3].RelArticlePictureArticle + "/" + ColumnsBodyObj[3].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ColumnsBodyObj[3].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }, {
+                    "title": ColumnsBodyObj[4].Headline,
+                    "subtitle": ColumnsBodyObj[4].CreateTime,
+                    "image_url": "https://www.mm.dk/images/article/" + ColumnsBodyObj[4].RelArticlePictureArticle + "/" + ColumnsBodyObj[4].Picture + ".jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.mm.dk/tjekdet/artikel/" + ColumnsBodyObj[4].UrlKey,
+                        "title": "Læs mere",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.11/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
+
 function sendHelp(sender) {
     let messageData = {
         "text": "Jeg har følgende funktioner",
@@ -612,6 +685,7 @@ module.exports.sendArticles = sendArticles;
 module.exports.sendFaktatjek = sendFaktatjek;
 module.exports.sendViralspiralen = sendViralspiralen;
 module.exports.sendVaerdAtVide = sendVaerdAtVide;
+module.exports.sendColumns = sendColumns;
 
 module.exports.sendHelp = sendHelp;
 module.exports.sendWitDefault = sendWitDefault;

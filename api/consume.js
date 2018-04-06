@@ -8,6 +8,7 @@ global.ArticleBodyObj;
 global.FaktatjekBodyObj;
 global.ViralspiralenBodyObj;
 global.VaerdAtVideBodyObj;
+global.ColumnsBodyObj;
 
 // API - GET Articles
 function getArticles() {
@@ -101,6 +102,28 @@ function getVaerdAtVide() {
     }).end();
 }
 
+// API - GET Columns
+function getColumns() {
+    var options = {
+        host: 'altingetpraktik.azurewebsites.net',
+        port: 80,
+        path: '/mmArticle/GetColumns',
+        method: 'GET'
+    };
+
+    http.request(options, function (res) {
+        var body = '';
+
+        res.on('data', function (chunk) {
+            body += chunk;
+        });
+
+        res.on('end', function () {
+            ColumnsBodyObj = JSON.parse(body);
+            console.log(ColumnsBodyObj);
+        })
+    }).end();
+}
 
 
 function isEmpty(obj) {
@@ -115,4 +138,5 @@ module.exports.getArticles = getArticles;
 module.exports.getFaktatjek = getFaktatjek;
 module.exports.getViralspiralen = getViralspiralen;
 module.exports.getVaerdAtVide = getVaerdAtVide;
+module.exports.getColumns = getColumns;
 module.exports.isEmpty = isEmpty;
