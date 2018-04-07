@@ -192,7 +192,44 @@ function sendArticles(sender) {
                     }],
                 }]
             }
-        }
+        },
+        "quick_replies":[
+            {
+                "content_type":"text",
+                "title":"Nyheder",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Video",
+                "payload":"<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type":"text",
+                "title":"Faktatjek",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Viralspiralen",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Værd at vide",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Perspektiv",
+                "payload":"<POSTBACK_PAYLOAD>"
+            },
+            {
+                "content_type":"text",
+                "title":"Klummer",
+                "payload":"<POSTBACK_PAYLOAD>"
+            }
+        ]
     }
     request({
         url: 'https://graph.facebook.com/v2.11/me/messages',
