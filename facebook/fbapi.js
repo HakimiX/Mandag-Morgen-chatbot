@@ -860,7 +860,7 @@ function sendHelp(sender) {
 
 function sendWitDefault(sender) {
     let messageData = {
-        "text": "Jeg forstår ikke hvad du mener!",
+        "text": "Jeg forstår desværre ikke hvad du mener :(",
         "quick_replies":[
             {
                 "content_type":"text",
